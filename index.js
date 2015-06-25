@@ -179,7 +179,7 @@ StoreCache.prototype.has = function has (key) {
  * @return {StoreCache}
  * @api public
  */
-StoreCache.prototype.put = function put (key, value) {
+StoreCache.prototype.put = function put (key, value) {  // @todo use `put-values`
   var type = kind()(key)
   if (type !== 'string' && type !== 'object') {
     return this
@@ -200,8 +200,8 @@ StoreCache.prototype.put = function put (key, value) {
   return this
 }
 
-// @todo
-StoreCache.prototype.del = function (key) {
+
+StoreCache.prototype.del = function (key) { // @todo use `del-values`
   if (arguments.length === 0) {
     this.store = {}
     return this
