@@ -230,7 +230,7 @@ StoreCache.prototype.del = function (key) {
  */
 
 StoreCache.prototype.enable = function enable (key) {
-  return this.option(key, true)
+  return this.has(key) ? this.put(key, true) : this.set(key, true)
 }
 
 /**
@@ -242,7 +242,7 @@ StoreCache.prototype.enable = function enable (key) {
  */
 
 StoreCache.prototype.disable = function disable (key) {
-  return this.option(key, false)
+  return this.has(key) ? this.put(key, false) : this.set(key, false)
 }
 
 /**
@@ -254,7 +254,7 @@ StoreCache.prototype.disable = function disable (key) {
  */
 
 StoreCache.prototype.truthy = function truthy (key) {
-  return Boolean(this.store(key))
+  return Boolean(this.get(key))
 }
 
 /**
@@ -266,7 +266,7 @@ StoreCache.prototype.truthy = function truthy (key) {
  */
 
 StoreCache.prototype.falsey = function falsey (key) {
-  return !Boolean(this.store(key))
+  return !Boolean(this.get(key))
 }
 
 /**
