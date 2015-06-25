@@ -15,6 +15,8 @@ var clone = lazy('clone-deep')
 var kind = lazy('kind-of')
 var set = lazy('set-value')
 var get = lazy('get-value')
+// var put = lazy('put-values')
+// var del = lazy('del-values')
 var del = lazy('del-value')
 var has = lazy('has-own-deep')
 
@@ -199,7 +201,6 @@ StoreCache.prototype.put = function put (key, value) {  // @todo use `put-values
   }
   return this
 }
-
 
 StoreCache.prototype.del = function (key) { // @todo use `del-values`
   if (arguments.length === 0) {
