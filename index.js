@@ -230,7 +230,10 @@ StoreCache.prototype.del = function (key) { // @todo use `del-values`
  */
 
 StoreCache.prototype.enable = function enable (key) {
-  return this.has(key) ? this.put(key, true) : this.set(key, true)
+  var method = this.has(key) ? this.put : this.set
+
+  method(key, true)
+  return this
 }
 
 /**
@@ -242,7 +245,10 @@ StoreCache.prototype.enable = function enable (key) {
  */
 
 StoreCache.prototype.disable = function disable (key) {
-  return this.has(key) ? this.put(key, false) : this.set(key, false)
+  var method = this.has(key) ? this.put : this.set
+
+  method(key, false)
+  return this
 }
 
 /**
