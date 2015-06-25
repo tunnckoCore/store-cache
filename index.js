@@ -101,7 +101,7 @@ StoreCache.prototype.store = function store (key, value) {
  * app.set('a.b.c', 'foo')  //=> set `a.b.c`, not update if exist
  * ```
  *
- * @param {*} `<key>`
+ * @param {*} `[key]`
  * @param {*} `[value]`
  * @return {StoreCache}
  * @api public
@@ -121,9 +121,9 @@ StoreCache.prototype.set = function set (key, value) {
  * app.get('a.b.c')   //=> get `a.b.c`
  * ```
  *
- * @param {*} `<key>`
+ * @param {*} `[key]`
  * @param {*} `[value]`
- * @return {StoreCache}
+ * @return {Object}
  * @api public
  */
 StoreCache.prototype.get = function get (key) {
@@ -137,19 +137,22 @@ StoreCache.prototype.get = function get (key) {
  * **Example**
  *
  * ```js
- * app.has() //=> false
+ * app.has()
+ * //=> true if `this.store` is not empty, false otherwise
+ *
+ * app.has(123) //=> false
  * app.has('a') //=> false
  * app.has('a.b.c') //=> false
  * ```
  *
- * @param  {String}  `<key>`
+ * @param  {String}  `[key]`
  * @return {Boolean}
  * @api public
  */
 StoreCache.prototype.has = function has (key) {
   var len = arguments.length
   if (len === 0) {
-    return
+    return Object.keys(this.store).length > 0
   }
   if (kind()(key) !== 'string') {
     return false
