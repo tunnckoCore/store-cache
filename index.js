@@ -39,7 +39,7 @@ function StoreCache (store) {
   if (!(this instanceof StoreCache)) {
     return new StoreCache(store)
   }
-  this.store = store || {}
+  this._store = store || {}
 }
 
 /**
@@ -49,11 +49,11 @@ function StoreCache (store) {
  * **Example**
  *
  * ```js
- * app.store()          //=> get clone of `this.store` object
+ * app.store()          //=> get clone of `this._store` object
  * app.store('a')       //=> get `a`
  * app.store('a.b.c')   //=> get `a.b.c`
  *
- * app.store({a: {b: 'c'}})   //=> extend `this.store` without overwrite existing
+ * app.store({a: {b: 'c'}})   //=> extend `this._store` without overwrite existing
  * app.store('a', 'foo')      //=> set `a`, not update if exist
  * app.store('a.b.c', 'foo')  //=> set `a.b.c`, not update if exist
  * ```
@@ -65,40 +65,40 @@ function StoreCache (store) {
  */
 StoreCache.prototype.store = function store (key, value) {
   if (arguments.length === 0) {
-    return clone()(this.store)
+    return clone()(this._store)
   }
   var type = kind()(key)
   if (type !== 'string' && type !== 'object') {
     return this
   }
   if (type === 'object') {
-    this.store = defaults()(this.store, key)
+    this._store = defaults()(this._store, key)
     return this
   }
   if (key.indexOf('.') === -1) {
     if (arguments.length > 1) {
-      if (!this.store.hasOwnProperty(key)) {
-        this.store[key] = value
+      if (!this._store.hasOwnProperty(key)) {
+        this._store[key] = value
       }
       return this
     }
-    return this.store[key]
+    return this._store[key]
   }
   if (arguments.length > 1) {
-    set()(this.store, key, value)
+    set()(this._store, key, value)
     return this
   }
-  return get()(this.store, key)
+  return get()(this._store, key)
 }
 
 /**
- * > Set value to `this.store` only if not exist,
+ * > Set value to `this._store` only if not exist,
  * or extend without overwrite existing
  *
  * **Example**
  *
  * ```js
- * app.set({a: {b: 'c'}})   //=> extend `this.store` without overwrite existing
+ * app.set({a: {b: 'c'}})   //=> extend `this._store` without overwrite existing
  * app.set('a', 'foo')      //=> set `a`, not update if exist
  * app.set('a.b.c', 'foo')  //=> set `a.b.c`, not update if exist
  * ```
@@ -113,12 +113,12 @@ StoreCache.prototype.set = function set (key, value) {
 }
 
 /**
- * > Get value or clone of `this.store`.
+ * > Get value or clone of `this._store`.
  *
  * **Example**
  *
  * ```js
- * app.get()          //=> get clone of `this.store` object
+ * app.get()          //=> get clone of `this._store` object
  * app.get('a')       //=> get `a`
  * app.get('a.b.c')   //=> get `a.b.c`
  * ```
@@ -140,7 +140,7 @@ StoreCache.prototype.get = function get (key) {
  *
  * ```js
  * app.has()
- * //=> true if `this.store` is not empty, false otherwise
+ * //=> true if `this._store` is not empty, false otherwise
  *
  * app.has(123) //=> false
  * app.has('a') //=> false
@@ -154,15 +154,15 @@ StoreCache.prototype.get = function get (key) {
 StoreCache.prototype.has = function has (key) {
   var len = arguments.length
   if (len === 0) {
-    return Object.keys(this.store).length > 0
+    return Object.keys(this._store).length > 0
   }
   if (kind()(key) !== 'string') {
     return false
   }
   if (key.indexOf('.') === -1) {
-    return this.store.hasOwnProperty(key)
+    return this._store.hasOwnProperty(key)
   }
-  return has()(this.store, key)
+  return has()(this._store, key)
 }
 
 /**
@@ -187,37 +187,37 @@ StoreCache.prototype.put = function put (key, value) {  // @todo use `put-values
     return this
   }
   if (type === 'object') {
-    this.store = assign()(this.store, key)
+    this._store = assign()(this._store, key)
     return this
   }
   if (key.indexOf('.') === -1) {
-    if (this.store.hasOwnProperty(key)) {
-      this.store[key] = value
+    if (this._store.hasOwnProperty(key)) {
+      this._store[key] = value
     }
     return this
   }
-  if (has()(this.store, key)) {
-    set()(this.store, key)
+  if (has()(this._store, key)) {
+    set()(this._store, key)
   }
   return this
 }
 
 StoreCache.prototype.del = function (key) { // @todo use `del-values`
   if (arguments.length === 0) {
-    this.store = {}
+    this._store = {}
     return this
   }
   if (kind()(key) !== 'string') {
     return this
   }
   if (key.indexOf('.') === -1) {
-    if (this.store.hasOwnProperty(key)) {
-      delete this.store[key]
+    if (this._store.hasOwnProperty(key)) {
+      delete this._store[key]
     }
     return this
   }
-  if (has()(this.store, key)) {
-    del()(this.store, key)
+  if (has()(this._store, key)) {
+    del()(this._store, key)
   }
   return this
 }
