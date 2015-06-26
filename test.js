@@ -15,7 +15,6 @@ var app = new StoreCache()
 
 test('store-cache:', function (done) {
   app.set('a', 'b')
-  console.log(app.store()) //=> {a: 'b'}
+  console.log(app.store()) // {a: 'b'}
   done()
 })
-

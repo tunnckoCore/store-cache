@@ -13,7 +13,7 @@
     "assign-deep": "~0.1.2",
     "clone-deep": "~0.1.1",
     "defaults-deep": "~0.2.2",
-    "del-value": "~0.3.0",
+    "del-values": "~0.1.0",
     "get-value": "~1.1.5",
     "has-own-deep": "~0.1.4",
     "has-values": "~0.1.3",
