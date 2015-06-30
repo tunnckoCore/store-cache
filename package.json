@@ -1,6 +1,6 @@
 {
   "name": "store-cache",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Simple and flexible API for in-memory object cache store that have set, get, put, del, has and store methods. Inspired by `option-cache`, `data-store`, `map-cache` and more.",
   "repository": "tunnckoCore/store-cache",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",

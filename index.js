@@ -201,7 +201,7 @@ StoreCache.prototype.put = function put (key, value) {  // @todo use `put-values
   return this
 }
 
-StoreCache.prototype.del = function (key, esc) { // @todo use `del-values`
+StoreCache.prototype.del = function del (key, esc) { // @todo use `del-values`
   if (arguments.length === 0) {
     this.cache = {}
     return this
@@ -224,6 +224,10 @@ StoreCache.prototype.del = function (key, esc) { // @todo use `del-values`
     del()(this.cache, key, esc)
   }
   return this
+}
+
+StoreCache.prototype.size = function size () {
+  return Object.keys(this.cache).length
 }
 
 /**
