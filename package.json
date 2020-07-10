@@ -10,7 +10,7 @@
     "test": "standard && node test.js"
   },
   "dependencies": {
-    "assign-deep": "~0.1.2",
+    "assign-deep": "~1.0.1",
     "clone-deep": "~0.1.1",
     "defaults-deep": "~0.2.2",
     "del-values": "~0.1.0",
